@@ -1,0 +1,5 @@
+{
+  "__@stumblestone/central": "../components/packages/central",
+  "@stumblestone/components": "../components/packages/components",
+  "__@stumblestone/utils": "../components/packages/utils"
+}
