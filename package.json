@@ -3,6 +3,7 @@
   "private": true,
   "version": "0.1.0",
   "description": "GitHub Pages app for the StumbleStone profile repository.",
+  "type": "module",
   "packageManager": "pnpm@11.8.0",
   "engines": {
     "node": ">=24 <25",
@@ -24,8 +25,11 @@
     "@fortawesome/free-solid-svg-icons": "7.2.0",
     "@fortawesome/react-fontawesome": "3.3.1",
     "@stumblestone/components": "1.0.0",
+    "@stumblestone/project-bookinator": "1.0.0",
+    "@stumblestone/refdown-ui": "1.0.0",
     "react": "19.2.7",
-    "react-dom": "19.2.7"
+    "react-dom": "19.2.7",
+    "react-router-dom": "7.13.0"
   },
   "devDependencies": {
     "@types/react": "19.2.17",

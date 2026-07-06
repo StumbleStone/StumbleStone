@@ -2,6 +2,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import HtmlWebpackPlugin from "html-webpack-plugin";
+import webpack from "webpack";
 import type { Configuration as WebpackConfiguration } from "webpack";
 import type { Configuration as DevServerConfiguration } from "webpack-dev-server";
 
@@ -54,6 +55,8 @@ function readEnv(): Record<string, string> {
     PUBLIC_PATH: process.env.PUBLIC_PATH,
     DEV_SERVER_HOST: process.env.DEV_SERVER_HOST,
     DEV_SERVER_PORT: process.env.DEV_SERVER_PORT,
+    SUPABASE_URL: process.env.SUPABASE_URL,
+    SUPABASE_PUBLISHABLE_KEY: process.env.SUPABASE_PUBLISHABLE_KEY,
   })) {
     if (value != null) {
       processEnv[key] = value;
@@ -94,6 +97,19 @@ const config = (_env: unknown, argv: { mode?: string } = {}): Configuration => {
         "react-dom": resolveAppPackage("react-dom"),
         "@emotion/react": resolveAppPackage("@emotion/react"),
         "@emotion/styled": resolveAppPackage("@emotion/styled"),
+        "react-router-dom": resolveAppPackage("react-router-dom"),
+        "@stumblestone/project-bookinator": path.resolve(
+          __dirname,
+          "../refdown/packages/bookinator/src",
+        ),
+        "@stumblestone/refdown-ui": path.resolve(
+          __dirname,
+          "../refdown/packages/refdown-ui/src",
+        ),
+        "@stumblestone/refdown-utils": path.resolve(
+          __dirname,
+          "../refdown/packages/refdown-utils/src",
+        ),
       },
     },
     devServer: {
@@ -110,7 +126,12 @@ const config = (_env: unknown, argv: { mode?: string } = {}): Configuration => {
         {
           test: /\.tsx?$/,
           exclude: /node_modules/,
-          use: "ts-loader",
+          use: {
+            loader: "ts-loader",
+            options: {
+              transpileOnly: true,
+            },
+          },
         },
         {
           test: /\.css$/i,
@@ -121,6 +142,12 @@ const config = (_env: unknown, argv: { mode?: string } = {}): Configuration => {
     plugins: [
       new HtmlWebpackPlugin({
         template: path.resolve(__dirname, "public/index.html"),
+      }),
+      new webpack.DefinePlugin({
+        __SUPABASE_URL__: JSON.stringify(env.SUPABASE_URL || ""),
+        __SUPABASE_PUBLISHABLE_KEY__: JSON.stringify(
+          env.SUPABASE_PUBLISHABLE_KEY || "",
+        ),
       }),
     ],
   };

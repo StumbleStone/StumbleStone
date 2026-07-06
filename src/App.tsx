@@ -1,7 +1,59 @@
 import styled from "@emotion/styled";
 import { Panel, Subtitle, Title } from "@stumblestone/components";
+import {
+  BookinatorBookChapterLoader,
+  BookinatorBookChapters,
+  BookinatorBookLoader,
+  BookinatorLibrary,
+  BookinatorReaderWithId,
+  BookinatorSharedElements,
+  BookinatorWriter,
+} from "@stumblestone/project-bookinator";
+import { EmotesRenderer, PromptsRenderer } from "@stumblestone/refdown-ui";
+import {
+  HashRouter,
+  Link,
+  Navigate,
+  Outlet,
+  Route,
+  Routes,
+} from "react-router-dom";
 
 export function App() {
+  return (
+    <HashRouter>
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route element={<GlobalElements />}>
+          <Route path="app/bookinator" element={<BookinatorSharedElements />}>
+            <Route path="" element={<BookinatorLibrary />} />
+            <Route path=":bookId" element={<BookinatorBookLoader />}>
+              <Route path=":chapterIndex?" element={<BookinatorBookChapters />}>
+                <Route path="" element={<BookinatorBookChapterLoader />}>
+                  <Route path="write" element={<BookinatorWriter />} />
+                  <Route path="read" element={<BookinatorReaderWithId />} />
+                </Route>
+              </Route>
+            </Route>
+          </Route>
+        </Route>
+        <Route path="*" element={<Navigate to="/" replace={true} />} />
+      </Routes>
+    </HashRouter>
+  );
+}
+
+function GlobalElements() {
+  return (
+    <>
+      <Outlet />
+      <PromptsRenderer />
+      <EmotesRenderer />
+    </>
+  );
+}
+
+function HomePage() {
   return (
     <S.PageShell>
       <S.Hero>
@@ -12,10 +64,13 @@ export function App() {
 
         <S.HeroCopy>
           A simple landing banner for unfinished ideas, sleeping prototypes, and
-          future rebuilds. We can add the rest of the site around this later.
+          future rebuilds. Bookinator is now wired in as the first larger app.
         </S.HeroCopy>
 
         <S.LinkRow>
+          <S.InternalLinkButton to="/app/bookinator">
+            Launch Bookinator
+          </S.InternalLinkButton>
           <S.LinkButton href="https://github.com/StumbleStone/StumbleStone">
             Open the repo
           </S.LinkButton>
@@ -88,6 +143,35 @@ namespace S {
     display: flex;
     flex-wrap: wrap;
     gap: ${({ theme }) => theme.space.md};
+  `;
+
+  export const InternalLinkButton = styled(Link)`
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: ${({ theme }) => theme.button.minHeight};
+    padding: ${({ theme }) =>
+      `${theme.button.paddingBlock} ${theme.button.paddingInline}`};
+    border-radius: ${({ theme }) => theme.button.borderRadius};
+    border: 1px solid ${({ theme }) => theme.button.tones.primary.borderColor};
+    background: ${({ theme }) => theme.button.tones.primary.background};
+    box-shadow: ${({ theme }) => theme.button.tones.primary.boxShadow};
+    color: ${({ theme }) => theme.button.tones.primary.textColor};
+    font-weight: 600;
+    text-decoration: none;
+    transition:
+      transform 120ms ease,
+      box-shadow 120ms ease,
+      border-color 120ms ease;
+
+    &:hover {
+      transform: translateY(-3px);
+    }
+
+    &:focus-visible {
+      outline: 2px solid ${({ theme }) => theme.button.focusRingColor};
+      outline-offset: 2px;
+    }
   `;
 
   export const LinkButton = styled.a<{ $secondary?: boolean }>`

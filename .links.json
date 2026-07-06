@@ -1,5 +1,8 @@
 {
-  "__@stumblestone/central": "../components/packages/central",
+  "@stumblestone/central": "../components/packages/central",
   "@stumblestone/components": "../components/packages/components",
-  "__@stumblestone/utils": "../components/packages/utils"
+  "@stumblestone/project-bookinator": "../refdown/packages/bookinator",
+  "@stumblestone/refdown-ui": "../refdown/packages/refdown-ui",
+  "@stumblestone/refdown-utils": "../refdown/packages/refdown-utils",
+  "@stumblestone/utils": "../components/packages/utils"
 }
