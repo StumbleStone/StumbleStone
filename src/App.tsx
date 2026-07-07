@@ -1,23 +1,11 @@
 import styled from "@emotion/styled";
 import { Panel, Subtitle, Title } from "@stumblestone/components";
 import {
-  BookinatorBookChapterLoader,
-  BookinatorBookChapters,
-  BookinatorBookLoader,
-  BookinatorLibrary,
-  BookinatorReaderWithId,
-  BookinatorSharedElements,
-  BookinatorWriter,
+  BookinatorApp,
+  BookinatorRouteMap,
 } from "@stumblestone/project-bookinator";
 import { EmotesRenderer, PromptsRenderer } from "@stumblestone/refdown-ui";
-import {
-  HashRouter,
-  Link,
-  Navigate,
-  Outlet,
-  Route,
-  Routes,
-} from "react-router-dom";
+import { HashRouter, Link, Navigate, Outlet, Route, Routes } from "react-router-dom";
 
 export function App() {
   return (
@@ -25,17 +13,7 @@ export function App() {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route element={<GlobalElements />}>
-          <Route path="app/bookinator" element={<BookinatorSharedElements />}>
-            <Route path="" element={<BookinatorLibrary />} />
-            <Route path=":bookId" element={<BookinatorBookLoader />}>
-              <Route path=":chapterIndex?" element={<BookinatorBookChapters />}>
-                <Route path="" element={<BookinatorBookChapterLoader />}>
-                  <Route path="write" element={<BookinatorWriter />} />
-                  <Route path="read" element={<BookinatorReaderWithId />} />
-                </Route>
-              </Route>
-            </Route>
-          </Route>
+          <Route path="app/bookinator/*" element={<BookinatorApp />} />
         </Route>
         <Route path="*" element={<Navigate to="/" replace={true} />} />
       </Routes>
@@ -68,7 +46,7 @@ function HomePage() {
         </S.HeroCopy>
 
         <S.LinkRow>
-          <S.InternalLinkButton to="/app/bookinator">
+          <S.InternalLinkButton to={BookinatorRouteMap.LIBRARY}>
             Launch Bookinator
           </S.InternalLinkButton>
           <S.LinkButton href="https://github.com/StumbleStone/StumbleStone">
