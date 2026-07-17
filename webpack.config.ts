@@ -98,17 +98,11 @@ const config = (_env: unknown, argv: { mode?: string } = {}): Configuration => {
         "@emotion/react": resolveAppPackage("@emotion/react"),
         "@emotion/styled": resolveAppPackage("@emotion/styled"),
         "react-router-dom": resolveAppPackage("react-router-dom"),
-        "@stumblestone/project-bookinator": path.resolve(
-          __dirname,
-          "../refdown/packages/bookinator/src",
-        ),
-        "@stumblestone/refdown-ui": path.resolve(
-          __dirname,
-          "../refdown/packages/refdown-ui/src",
-        ),
-        "@stumblestone/refdown-utils": path.resolve(
-          __dirname,
-          "../refdown/packages/refdown-utils/src",
+        // Bookinator 1.0.0's wildcard export maps this directory import to
+        // dist/Settings.js instead of the published directory index.
+        "@stumblestone/project-bookinator/Settings$": path.resolve(
+          resolveAppPackage("@stumblestone/project-bookinator"),
+          "dist/Settings/index.js",
         ),
       },
     },
@@ -123,6 +117,13 @@ const config = (_env: unknown, argv: { mode?: string } = {}): Configuration => {
     },
     module: {
       rules: [
+        {
+          // Refdown's published ESM currently uses extensionless relative imports.
+          test: /\.m?js$/,
+          resolve: {
+            fullySpecified: false,
+          },
+        },
         {
           test: /\.tsx?$/,
           exclude: /node_modules/,

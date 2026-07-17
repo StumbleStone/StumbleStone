@@ -1,8 +1,8 @@
 {
-  "@stumblestone/central": "../components/packages/central",
-  "@stumblestone/components": "../components/packages/components",
-  "@stumblestone/project-bookinator": "../refdown/packages/bookinator",
-  "@stumblestone/refdown-ui": "../refdown/packages/refdown-ui",
-  "@stumblestone/refdown-utils": "../refdown/packages/refdown-utils",
-  "@stumblestone/utils": "../components/packages/utils"
+  "__@stumblestone/central": "../components/packages/central",
+  "__@stumblestone/components": "../components/packages/components",
+  "__@stumblestone/project-bookinator": "../refdown/packages/bookinator",
+  "__@stumblestone/refdown-ui": "../refdown/packages/refdown-ui",
+  "__@stumblestone/refdown-utils": "../refdown/packages/refdown-utils",
+  "__@stumblestone/utils": "../components/packages/utils"
 }
