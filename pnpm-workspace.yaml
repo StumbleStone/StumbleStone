@@ -1,1 +1,4 @@
 lockfileIncludeTarballUrl: true
+
+minimumReleaseAgeExclude:
+  - "@stumblestone/*"
