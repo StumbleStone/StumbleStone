@@ -1,6 +1,7 @@
 # StumbleStone
 
-GitHub Pages profile site for the `StumbleStone` repo.
+GitHub Pages organization site published from the `stumblestone.github.io`
+repository at <https://stumblestone.github.io>.
 
 ## Getting started
 
@@ -22,7 +23,7 @@ corepack pnpm format
 ## Configuration
 
 - `.nvmrc` pins the Node 24 runtime used by the repo.
-- `.env` provides the default GitHub Pages base path and dev server settings.
+- `.env` provides the default root Pages path and dev server settings.
 - `.env.local` can override local settings without being committed.
 - `.npmrc` keeps the repo aligned with the other StumbleStone projects.
 

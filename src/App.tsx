@@ -49,7 +49,7 @@ function HomePage() {
           <S.InternalLinkButton to={BookinatorRouteMap.LIBRARY}>
             Launch Bookinator
           </S.InternalLinkButton>
-          <S.LinkButton href="https://github.com/StumbleStone/StumbleStone">
+          <S.LinkButton href="https://github.com/StumbleStone/stumblestone.github.io">
             Open the repo
           </S.LinkButton>
           <S.LinkButton

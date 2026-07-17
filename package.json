@@ -2,7 +2,7 @@
   "name": "stumblestone-site",
   "private": true,
   "version": "0.1.0",
-  "description": "GitHub Pages app for the StumbleStone profile repository.",
+  "description": "GitHub Pages organization site for StumbleStone.",
   "type": "module",
   "packageManager": "pnpm@11.8.0",
   "engines": {
